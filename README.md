@@ -2,7 +2,7 @@
 
 ---
 
-## 🧠 Architecture
+##  Architecture
 
 ```
 PC1 (srsUE + B210)
@@ -12,9 +12,9 @@ PC2 (srsRAN gNB + B210 + Open5GS Docker)
 
 ---
 
-# ⚙️ PRÉREQUIS (PC1 & PC2)
+#  PRÉREQUIS (PC1 & PC2)
 
-## 🔧 CPU en mode performance (OBLIGATOIRE)
+##  CPU en mode performance (OBLIGATOIRE)
 
 ```bash
 # Activer
@@ -37,7 +37,7 @@ sudo uhd_images_downloader
 
 ---
 
-# 🐳 PC2 — INSTALLATION DOCKER
+# 🖥️ PC2 — INSTALLATION DOCKER
 
 ```bash
 sudo apt-get install -y docker.io docker-compose-plugin
@@ -47,7 +47,7 @@ newgrp docker
 
 ---
 
-# 🏗️ INSTALLATION srsRAN gNB (PC2)
+# INSTALLATION srsRAN gNB (PC2)
 
 ```bash
 git clone https://github.com/srsran/srsRAN_Project.git
@@ -66,7 +66,7 @@ make -j$(nproc) gnb
 
 ---
 
-# 📡 INSTALLATION srsUE (PC1)
+# INSTALLATION srsUE (PC1)
 
 ```bash
 git clone https://github.com/srsran/srsRAN_4G.git
@@ -260,7 +260,7 @@ services:
 
 ---
 
-# 📶 CONFIGURATION gNB (PC2)
+# CONFIGURATION gNB (PC2)
 
 ```bash
 nano ~/gnb_uhd.yaml
@@ -321,7 +321,7 @@ pcap:
 
 ---
 
-# 📱 CONFIGURATION UE (PC1)
+# 📱CONFIGURATION UE (PC1)
 
 ```bash
 nano ~/ue_uhd.conf
@@ -336,7 +336,7 @@ ip_netmask = 255.255.0.0
 
 ---
 
-# 🚀 SCRIPT DÉMARRAGE PC2
+# SCRIPT DÉMARRAGE PC2
 
 ```bash
 cat << 'EOF' > ~/start_5g.sh
@@ -366,7 +366,7 @@ chmod +x ~/start_5g.sh
 
 ---
 
-# 🔗 SCRIPT UE PC1
+# SCRIPT UE PC1
 
 ```bash
 cat << 'EOF' > ~/fix_ue_route.sh
@@ -415,7 +415,7 @@ sudo taskset -c 0-11 ./srsue ~/ue_uhd.conf
 
 ---
 
-# 🔁 UPDATE IP AUTOMATIQUE
+# UPDATE IP AUTOMATIQUE
 
 ```bash
 NEW_IP=$(ip addr show | grep "inet " | grep -v "127\|10.45\|10.53\|172\|docker" | awk '{print $2}' | cut -d'/' -f1 | head -1)
@@ -427,7 +427,7 @@ sed -i "s/bind_addr: .*/bind_addr: $NEW_IP/" ~/gnb_uhd.yaml
 
 ---
 
-# 🔍 VÉRIFICATIONS
+#  VÉRIFICATIONS
 
 ```bash
 ip addr show ogstun
@@ -453,7 +453,7 @@ docker logs open5gs_5gc | grep UPF
 
 ---
 
-# ✅ RÉSULTAT FINAL
+# RÉSULTAT FINAL
 
 * UE attaché ✅
 * Session PDU OK ✅
